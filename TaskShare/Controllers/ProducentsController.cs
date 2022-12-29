@@ -9,85 +9,85 @@ using TaskShare.Models;
 
 namespace TaskShare.Controllers
 {
-    public class IssuesController : Controller
+    public class ProducentsController : Controller
     {
         private readonly DataContext _context;
 
-        public IssuesController(DataContext context)
+        public ProducentsController(DataContext context)
         {
             _context = context;
         }
 
-        // GET: Issues
+        // GET: Producents
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Issues.ToListAsync());
+              return View(await _context.Users.ToListAsync());
         }
 
-        // GET: Issues/Details/5
+        // GET: Producents/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Issues == null)
+            if (id == null || _context.Users == null)
             {
                 return NotFound();
             }
 
-            var issue = await _context.Issues
+            var producent = await _context.Users
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (issue == null)
+            if (producent == null)
             {
                 return NotFound();
             }
 
-            return View(issue);
+            return View(producent);
         }
 
-        // GET: Issues/Create
+        // GET: Producents/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Issues/Create
+        // POST: Producents/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Label,Description")] Issue issue)
+        public async Task<IActionResult> Create([Bind("Id,Name,Address")] Producent producent)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(issue);
+                _context.Add(producent);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(issue);
+            return View(producent);
         }
 
-        // GET: Issues/Edit/5
+        // GET: Producents/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Issues == null)
+            if (id == null || _context.Users == null)
             {
                 return NotFound();
             }
 
-            var issue = await _context.Issues.FindAsync(id);
-            if (issue == null)
+            var producent = await _context.Users.FindAsync(id);
+            if (producent == null)
             {
                 return NotFound();
             }
-            return View(issue);
+            return View(producent);
         }
 
-        // POST: Issues/Edit/5
+        // POST: Producents/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Label,Description")] Issue issue)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Address")] Producent producent)
         {
-            if (id != issue.Id)
+            if (id != producent.Id)
             {
                 return NotFound();
             }
@@ -96,12 +96,12 @@ namespace TaskShare.Controllers
             {
                 try
                 {
-                    _context.Update(issue);
+                    _context.Update(producent);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!IssueExists(issue.Id))
+                    if (!ProducentExists(producent.Id))
                     {
                         return NotFound();
                     }
@@ -112,49 +112,49 @@ namespace TaskShare.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(issue);
+            return View(producent);
         }
 
-        // GET: Issues/Delete/5
+        // GET: Producents/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Issues == null)
+            if (id == null || _context.Users == null)
             {
                 return NotFound();
             }
 
-            var issue = await _context.Issues
+            var producent = await _context.Users
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (issue == null)
+            if (producent == null)
             {
                 return NotFound();
             }
 
-            return View(issue);
+            return View(producent);
         }
 
-        // POST: Issues/Delete/5
+        // POST: Producents/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Issues == null)
+            if (_context.Users == null)
             {
-                return Problem("Entity set 'DataContext.Issues'  is null.");
+                return Problem("Entity set 'DataContext.Users'  is null.");
             }
-            var issue = await _context.Issues.FindAsync(id);
-            if (issue != null)
+            var producent = await _context.Users.FindAsync(id);
+            if (producent != null)
             {
-                _context.Issues.Remove(issue);
+                _context.Users.Remove(producent);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool IssueExists(int id)
+        private bool ProducentExists(int id)
         {
-          return _context.Issues.Any(e => e.Id == id);
+          return _context.Users.Any(e => e.Id == id);
         }
     }
 }

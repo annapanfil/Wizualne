@@ -19,17 +19,16 @@ namespace TaskShare.Models
         protected override void OnModelCreating(ModelBuilder modelbuilder)
         {
             // join tables
-            modelbuilder.Entity<Task>()
+            modelbuilder.Entity<Product>()
                 .HasKey(t => new { t.Id });
-            modelbuilder.Entity<Task>()
-                .HasOne(t => t.User)
-                .WithMany(u => u.Tasks)
-                .HasForeignKey(t => t.UserID);
+            modelbuilder.Entity<Product>()
+                .HasOne(t => t.Producent)
+                .WithMany(u => u.Products)
+                .HasForeignKey(t => t.ProducentID);
         }
 
-        public DbSet<Issue> Issues { get; set; }
         public DbSet<Status> Statuses { get; set; }
-        public DbSet<Task> Tasks { get; set; }
-        public DbSet<User> Users { get; set; }
+        public DbSet<Product> Tasks { get; set; }
+        public DbSet<Producent> Users { get; set; }
     }
 }

@@ -5,6 +5,6 @@
         public int Id { get; set; }
         public StatusType StatusType { get; set; }
         public DateTime Occurred { get; set; }
-        public Task? Task { get; set; }
+        public Product? Task { get; set; }
     }
 }
