@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TaskShare.Models
 {
@@ -12,7 +13,11 @@ namespace TaskShare.Models
         public int Priority { get; set; }
 
         public List<Status> Statuses { get; set; } = new ();
+
+        [ForeignKey("User")]
+        public int? UserID { get; set; }
         public User? User { get; set; }
+        
         public Issue? Issue { get; set; }
 
     }
