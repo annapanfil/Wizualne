@@ -21,19 +21,19 @@ namespace TaskShare.Controllers
         // GET: Products
         public async Task<IActionResult> Index()
         {
-            var dataContext = _context.Tasks.Include(p => p.Producent);
+            var dataContext = _context.Products.Include(p => p.Producent);
             return View(await dataContext.ToListAsync());
         }
 
         // GET: Products/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Tasks == null)
+            if (id == null || _context.Products == null)
             {
                 return NotFound();
             }
 
-            var product = await _context.Tasks
+            var product = await _context.Products
                 .Include(p => p.Producent)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (product == null)
@@ -47,7 +47,7 @@ namespace TaskShare.Controllers
         // GET: Products/Create
         public IActionResult Create()
         {
-            ViewData["ProducentID"] = new SelectList(_context.Users, "Id", "Id");
+            ViewData["ProducentID"] = new SelectList(_context.Producents, "Id", "Id");
             return View();
         }
 
@@ -64,24 +64,24 @@ namespace TaskShare.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ProducentID"] = new SelectList(_context.Users, "Id", "Id", product.ProducentID);
+            ViewData["ProducentID"] = new SelectList(_context.Producents, "Id", "Id", product.ProducentID);
             return View(product);
         }
 
         // GET: Products/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Tasks == null)
+            if (id == null || _context.Products == null)
             {
                 return NotFound();
             }
 
-            var product = await _context.Tasks.FindAsync(id);
+            var product = await _context.Products.FindAsync(id);
             if (product == null)
             {
                 return NotFound();
             }
-            ViewData["ProducentID"] = new SelectList(_context.Users, "Id", "Id", product.ProducentID);
+            ViewData["ProducentID"] = new SelectList(_context.Producents, "Id", "Id", product.ProducentID);
             return View(product);
         }
 
@@ -117,19 +117,19 @@ namespace TaskShare.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ProducentID"] = new SelectList(_context.Users, "Id", "Id", product.ProducentID);
+            ViewData["ProducentID"] = new SelectList(_context.Producents, "Id", "Id", product.ProducentID);
             return View(product);
         }
 
         // GET: Products/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Tasks == null)
+            if (id == null || _context.Products == null)
             {
                 return NotFound();
             }
 
-            var product = await _context.Tasks
+            var product = await _context.Products
                 .Include(p => p.Producent)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (product == null)
@@ -145,14 +145,14 @@ namespace TaskShare.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Tasks == null)
+            if (_context.Products == null)
             {
-                return Problem("Entity set 'DataContext.Tasks'  is null.");
+                return Problem("Entity set 'DataContext.Products'  is null.");
             }
-            var product = await _context.Tasks.FindAsync(id);
+            var product = await _context.Products.FindAsync(id);
             if (product != null)
             {
-                _context.Tasks.Remove(product);
+                _context.Products.Remove(product);
             }
             
             await _context.SaveChangesAsync();
@@ -161,7 +161,7 @@ namespace TaskShare.Controllers
 
         private bool ProductExists(int id)
         {
-          return _context.Tasks.Any(e => e.Id == id);
+          return _context.Products.Any(e => e.Id == id);
         }
     }
 }

@@ -21,18 +21,18 @@ namespace TaskShare.Controllers
         // GET: Producents
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Users.ToListAsync());
+              return View(await _context.Producents.ToListAsync());
         }
 
         // GET: Producents/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Users == null)
+            if (id == null || _context.Producents == null)
             {
                 return NotFound();
             }
 
-            var producent = await _context.Users
+            var producent = await _context.Producents
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (producent == null)
             {
@@ -67,12 +67,12 @@ namespace TaskShare.Controllers
         // GET: Producents/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Users == null)
+            if (id == null || _context.Producents == null)
             {
                 return NotFound();
             }
 
-            var producent = await _context.Users.FindAsync(id);
+            var producent = await _context.Producents.FindAsync(id);
             if (producent == null)
             {
                 return NotFound();
@@ -118,12 +118,12 @@ namespace TaskShare.Controllers
         // GET: Producents/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Users == null)
+            if (id == null || _context.Producents == null)
             {
                 return NotFound();
             }
 
-            var producent = await _context.Users
+            var producent = await _context.Producents
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (producent == null)
             {
@@ -138,14 +138,14 @@ namespace TaskShare.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Users == null)
+            if (_context.Producents == null)
             {
-                return Problem("Entity set 'DataContext.Users'  is null.");
+                return Problem("Entity set 'DataContext.Producents'  is null.");
             }
-            var producent = await _context.Users.FindAsync(id);
+            var producent = await _context.Producents.FindAsync(id);
             if (producent != null)
             {
-                _context.Users.Remove(producent);
+                _context.Producents.Remove(producent);
             }
             
             await _context.SaveChangesAsync();
@@ -154,7 +154,7 @@ namespace TaskShare.Controllers
 
         private bool ProducentExists(int id)
         {
-          return _context.Users.Any(e => e.Id == id);
+          return _context.Producents.Any(e => e.Id == id);
         }
     }
 }

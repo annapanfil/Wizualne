@@ -27,8 +27,7 @@ namespace TaskShare.Models
                 .HasForeignKey(t => t.ProducentID);
         }
 
-        public DbSet<Status> Statuses { get; set; }
-        public DbSet<Product> Tasks { get; set; }
-        public DbSet<Producent> Users { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Producent> Producents { get; set; }
     }
 }
