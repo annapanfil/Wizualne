@@ -56,7 +56,7 @@ namespace TaskShare.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,Price,ProducentID")] Product product)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description,Price,ProductCategory,ProducentID")] Product product)
         {
             if (ModelState.IsValid)
             {
@@ -90,7 +90,7 @@ namespace TaskShare.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Price,ProducentID")] Product product)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Price,ProductCategory,ProducentID")] Product product)
         {
             if (id != product.Id)
             {

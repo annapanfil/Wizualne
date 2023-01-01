@@ -11,7 +11,7 @@ namespace TaskShare.Models
         public string Description { get; set; }
         public int Price { get; set; }
 
-        // public ProductCategory ProductCategory { get; set; }
+        public ProductCategory ProductCategory { get; set; }
 
         public int? ProducentID { get; set; }
         public Producent? Producent { get; set; }

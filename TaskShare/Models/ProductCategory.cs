@@ -1,10 +1,12 @@
 ﻿namespace TaskShare.Models
 {
-  /*  public enum ProductCategory
+  public enum ProductCategory
     {
         Sweets,
         Drinks,
         Dishes,
-        Cookies,     
-    }*/
+        Cookies,
+        ChocolateBars,
+        Cereals
+    }
 }
