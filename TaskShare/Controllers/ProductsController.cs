@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mime;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -19,10 +20,22 @@ namespace TaskShare.Controllers
         }
 
         // GET: Products
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string SearchText = "")
         {
-            var dataContext = _context.Products.Include(p => p.Producent);
-            return View(await dataContext.ToListAsync());
+            List<Product> products;
+            if (SearchText != "" && SearchText != null)
+            {
+                products = _context.Products
+                    .Where(p => p.Name.Contains(SearchText))
+                    .ToList();
+            }
+            else
+            {
+                products = _context.Products.ToList();
+            }
+
+            //var dataContext = _context.Products.Include(p => p.Producent);
+            return View(products);
         }
 
         // GET: Products/Details/5
