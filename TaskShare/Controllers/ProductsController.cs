@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TaskShare.Models;
+using TaskShare.Views.Shared.Components.SearchBar;
 
 namespace TaskShare.Controllers
 {
@@ -23,18 +24,20 @@ namespace TaskShare.Controllers
         public async Task<IActionResult> Index(string SearchText = "")
         {
             List<Product> products;
+            SPager SearchPager = new SPager() { Action = "Index", Controller = "Products", SearchText = SearchText };
+            ViewBag.SearchPager = SearchPager;
+
             if (SearchText != "" && SearchText != null)
             {
                 products = _context.Products
+                    .Include(p => p.Producent)
                     .Where(p => p.Name.Contains(SearchText))
                     .ToList();
             }
             else
             {
-                products = _context.Products.ToList();
+                products = _context.Products.Include(p => p.Producent).ToList();
             }
-
-            //var dataContext = _context.Products.Include(p => p.Producent);
             return View(products);
         }
 
