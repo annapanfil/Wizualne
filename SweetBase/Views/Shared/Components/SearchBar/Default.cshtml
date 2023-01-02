@@ -1,0 +1,11 @@
+﻿@using _145233.SweetBase.Views.Shared.Components.SearchBar
+@model SPager
+
+<div class="col-4 p-0 justify-content-end">
+    <form asp-controller="@Model.Controller" asp-action="@Model.Action">
+        <span class="btn-group">
+            <input class="form-control" type="text" name="SearchText" value="@Model.SearchText" placeholder="Search name" />
+            <input class=" p-1 ml-2 btn btn-sm btn-info" type="submit" value="Search" />
+        </span>
+    </form>
+</div>
