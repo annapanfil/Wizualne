@@ -21,24 +21,29 @@ namespace TaskShare.Controllers
         }
 
         // GET: Products
-        public async Task<IActionResult> Index(string SearchText = "")
+        public async Task<IActionResult> Index(string SearchText = null, float MinPrice = 0, float MaxPrice = Product.MAX_PRICE, ProductCategory? Category = null)
         {
-            List<Product> products;
-            SPager SearchPager = new SPager() { Action = "Index", Controller = "Products", SearchText = SearchText };
-            ViewBag.SearchPager = SearchPager;
+            System.Console.WriteLine("category" + Category);
+            var Products = _context.Products
+                .Include(p => p.Producent)
+                .Where(p => p.Price >= MinPrice && p.Price <= MaxPrice);
 
-            if (SearchText != "" && SearchText != null)
+            if (SearchText != null)
             {
-                products = _context.Products
-                    .Include(p => p.Producent)
-                    .Where(p => p.Name.Contains(SearchText))
-                    .ToList();
+                Products = Products
+                    .Where(p => p.Name.Contains(SearchText));    
             }
-            else
+            if (Category != null)
             {
-                products = _context.Products.Include(p => p.Producent).ToList();
+                Products = Products
+                    .Where(p => p.ProductCategory.Equals(Category));
             }
-            return View(products);
+            ViewBag.SearchText = SearchText;
+            ViewBag.MinPrice = MinPrice;
+            ViewBag.MaxPrice = MaxPrice;
+            ViewBag.Category = Category == null ? 0 : (int)Category + 1;
+
+            return View(Products.ToList());
         }
 
         // GET: Products/Details/5

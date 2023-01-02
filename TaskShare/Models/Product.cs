@@ -6,6 +6,7 @@ namespace TaskShare.Models
     [Index(nameof(Name), IsUnique = true)]
     public class Product
     {
+        public const int MAX_PRICE = 1000;
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }

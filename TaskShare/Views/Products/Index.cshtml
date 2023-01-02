@@ -3,14 +3,34 @@
 @{
     ViewData["Title"] = "Index";
 }
+<h1>Products</h1>
 
-<h1>Index</h1>
+<div> 
+    <form asp-controller="Products" asp-action="Index">
+        <div class="col-lg-2">
+            <input class="form-control" type="text" name="SearchText" placeholder="Name" value="@ViewBag.SearchText" />
+        </div>
+        <div class="btn-group"> 
+            <input class="form-control" type="number" name="MinPrice" placeholder="Min price" value="@ViewBag.MinPrice" />
+            <input class="form-control" type="number" name="MaxPrice" placeholder="Max price" value="@ViewBag.MaxPrice" />
+        </div>
+        <div class="col-lg-2">
+            <select id="SelectCategory" class="form-control" name="Category" asp-items="Html.GetEnumSelectList<ProductCategory>()">
+                <option value=null selected disabled hidden>Choose category</option>
+            </select>
+        </div>
+        <input class=" p-1 ml-2 btn btn-info" type="submit" value="Search" />
+        <a asp-action="Index">Reset filters</a>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+    </form>
+</div>
 
-<vc:search-bar search-pager="@ViewBag.SearchPager"></vc:search-bar>
+<script>
+        window.onload = function() {
+        document.getElementById(
+            "SelectCategory").selectedIndex = "@ViewBag.Category";
+    }
+</script>
 
 <table class="table">
     <thead>
@@ -60,3 +80,7 @@
 }
     </tbody>
 </table>
+
+<p>
+    <a asp-action="Create">Add new product</a>
+</p>
