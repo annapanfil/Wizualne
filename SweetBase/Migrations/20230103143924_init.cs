@@ -2,10 +2,10 @@
 
 #nullable disable
 
-namespace _145233.SweetBase.Migrations
+namespace SweetBase.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -33,6 +33,7 @@ namespace _145233.SweetBase.Migrations
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     Description = table.Column<string>(type: "TEXT", nullable: false),
                     Price = table.Column<int>(type: "INTEGER", nullable: false),
+                    ProductCategory = table.Column<int>(type: "INTEGER", nullable: false),
                     ProducentID = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>

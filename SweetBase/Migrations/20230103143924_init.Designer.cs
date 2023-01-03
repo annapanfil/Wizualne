@@ -8,11 +8,11 @@ using _145233.SweetBase.Models;
 
 #nullable disable
 
-namespace _145233.SweetBase.Migrations
+namespace SweetBase.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20221231103441_enum")]
-    partial class @enum
+    [Migration("20230103143924_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,7 +20,7 @@ namespace _145233.SweetBase.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.1");
 
-            modelBuilder.Entity("SweetBase.Models.Producent", b =>
+            modelBuilder.Entity("_145233.SweetBase.Models.Producent", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -42,7 +42,7 @@ namespace _145233.SweetBase.Migrations
                     b.ToTable("Producents");
                 });
 
-            modelBuilder.Entity("SweetBase.Models.Product", b =>
+            modelBuilder.Entity("_145233.SweetBase.Models.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -75,16 +75,16 @@ namespace _145233.SweetBase.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("SweetBase.Models.Product", b =>
+            modelBuilder.Entity("_145233.SweetBase.Models.Product", b =>
                 {
-                    b.HasOne("SweetBase.Models.Producent", "Producent")
+                    b.HasOne("_145233.SweetBase.Models.Producent", "Producent")
                         .WithMany("Products")
                         .HasForeignKey("ProducentID");
 
                     b.Navigation("Producent");
                 });
 
-            modelBuilder.Entity("SweetBase.Models.Producent", b =>
+            modelBuilder.Entity("_145233.SweetBase.Models.Producent", b =>
                 {
                     b.Navigation("Products");
                 });
